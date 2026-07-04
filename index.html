@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Delta Gold - WhatsApp Bot Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { light: '#FFD700', DEFAULT: '#DAA520', dark: '#B8860B', deeper: '#8B6914' },
+            wa: { green: '#00A884', dark: '#111B21', deeper: '#0B141A', header: '#202C33', input: '#2A3942', border: '#222D34', text: '#E9EDEF', muted: '#8696A0' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-wa-deeper min-h-dvh">
+  <noscript>
+    <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;font-family:system-ui;text-align:center;color:#8696A0">
+      <div>
+        <p style="font-size:48px;margin:0 0 16px">🏆</p>
+        <p style="color:#E9EDEF;font-size:17px;font-weight:700;margin:0 0 8px">JavaScript requis</p>
+        <p style="font-size:13px">Activez JavaScript pour utiliser le dashboard Delta Gold.</p>
+      </div>
+    </div>
+  </noscript>
+  <div id="app">
+    <div id="app-loading" style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:16px;color:#8696A0;font-family:-apple-system,system-ui,sans-serif;padding:20px">
+      <div style="width:40px;height:40px;border:3px solid rgba(218,165,32,0.2);border-top-color:#DAA520;border-radius:50%;animation:dg-spin 0.7s linear infinite"></div>
+      <p style="font-size:14px;margin:0">Chargement du dashboard...</p>
+    </div>
+  </div>
+  <style>@keyframes dg-spin{to{transform:rotate(360deg)}}</style>
+  <script>
+    // Safety net: if JS modules fail to load, show error after 15s
+    window.__dgLoaded = false;
+    setTimeout(function() {
+      if (window.__dgLoaded) return;
+      var el = document.getElementById('app-loading');
+      if (!el) return;
+      el.innerHTML = '<div style="text-align:center;max-width:420px">'
+        + '<p style="font-size:48px;margin:0 0 16px">⚠️</p>'
+        + '<p style="color:#E9EDEF;font-size:17px;font-weight:700;margin:0 0 8px">Impossible de charger le dashboard</p>'
+        + '<p style="color:#8696A0;font-size:13px;line-height:1.6;margin:0 0 16px">'
+        + 'Les modules JavaScript n\'ont pas pu se charger.<br>'
+        + 'Vérifiez que <strong style="color:#DAA520">tous les fichiers</strong> sont à la racine du repo GitHub.</p>'
+        + '<p style="font-size:12px;margin:0">'
+        + '<a href="/api/status" style="color:#DAA520">Tester l\'API → /api/status</a></p></div>';
+    }, 15000);
+  </script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
