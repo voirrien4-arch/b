@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "verify": "node --input-type=module -e \\\"import fs from 'fs';const r=['server.js','index.html','main.js','styles.css','bot.js','commands.js','ai.js','images.js','data/commands.js','ui/dashboard.js','ui/chat-view.js','ui/commands-view.js','ui/tools-view.js'];let ok=true;for(const f of r){if(fs.existsSync(f)){console.log('  ✅ '+f)}else{console.error('  ❌ '+f+' MISSING');ok=false}};if(!ok){console.error('\\\\n❌ Fichiers manquants! Assurez-vous que TOUS les fichiers sont à la racine du repo GitHub.');process.exit(1)}else{console.log('\\\\n✅ '+r.length+' fichiers OK')}\\\"",
+    "verify": "node verify.js",
     "build": "npm install && npm run verify"
   },
   "dependencies": {
